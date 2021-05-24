@@ -1,15 +1,16 @@
 package io.iskaldvind.weather.model
 
-import io.iskaldvind.weather.model.Repository
-
-
 class RepositoryImpl : Repository {
 
     override fun getWeatherFromServer(): Weather {
         return Weather()
     }
 
-    override fun getWeatherFromLocalStorage(): Weather {
-        return Weather()
+    override fun getWeatherFromLocalStorageRus(): List<Weather> {
+        return getRusCities()
+    }
+
+    override fun getWeatherFromLocalStorageWorld(): List<Weather> {
+        return getWorldCities()
     }
 }

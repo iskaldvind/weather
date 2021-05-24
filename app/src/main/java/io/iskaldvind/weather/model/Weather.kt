@@ -1,15 +1,15 @@
 package io.iskaldvind.weather.model
 
-import io.iskaldvind.weather.model.Cities
 import kotlin.math.roundToInt
 
 const val MAX_TEMP = 30
 const val MIN_TEMP = -30
 
-
+val CITIES_RUS = listOf("Moscow", "St. Petersburg", "Samara")
+val CITIES_WORLD = listOf("New York", "Berlin", "Tokyo")
 
 data class Weather(
-    val city: Cities = getRandomCity(),
+    val city: String = getRandomCity(),
     val currentTemperature: Int = getRandomTemperature(),
     val currentWeather: Weathers = getRandomWeather(),
     val morningTemperature: Int = getRandomTemperature(),
@@ -25,17 +25,25 @@ data class Weather(
 )
 
 
-fun getRandomCity(): Cities {
-    return when ((Math.random() * 3).roundToInt()) {
-        0 -> Cities.MOSCOW
-        1 -> Cities.NEWYORK
-        2 -> Cities.TOKYO
-        else -> Cities.CAIRO
+fun getWorldCities(): List<Weather> {
+    val worldWeather = mutableListOf<Weather>()
+    CITIES_WORLD.forEach {
+        worldWeather.add(Weather(city = it))
     }
+    return worldWeather.toList()
 }
 
 
-fun getRandomWeather(): Weathers {
+fun getRusCities(): List<Weather> {
+    val rusWeather = mutableListOf<Weather>()
+    CITIES_RUS.forEach {
+        rusWeather.add(Weather(city = it))
+    }
+    return rusWeather.toList()
+}
+
+
+private fun getRandomWeather(): Weathers {
     return when ((Math.random() * 4).roundToInt()) {
         0 -> Weathers.SUNNY
         1 -> Weathers.CLOUDY
@@ -46,11 +54,14 @@ fun getRandomWeather(): Weathers {
 }
 
 
-fun getRandomTemperature(): Int {
+private fun getRandomTemperature(): Int {
     return (Math.random() * (MAX_TEMP - MIN_TEMP) - ((MAX_TEMP - MIN_TEMP)/2)).roundToInt()
 }
 
 
-
+private fun getRandomCity(): String {
+    val rnd = (Math.random() * (CITIES_RUS.size - 1)).roundToInt()
+    return CITIES_RUS[rnd]
+}
 
 
