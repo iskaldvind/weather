@@ -10,12 +10,9 @@ import com.google.android.material.snackbar.Snackbar
 import io.iskaldvind.weather.R
 import io.iskaldvind.weather.databinding.MainFragmentBinding
 import io.iskaldvind.weather.model.AppState
-import io.iskaldvind.weather.model.Weather
 import io.iskaldvind.weather.model.WeatherList
 import io.iskaldvind.weather.view.support.MainFragmentAdapter
 import io.iskaldvind.weather.viewmodel.MainViewModel
-
-
 
 class MainFragment : Fragment() {
 
@@ -31,18 +28,14 @@ class MainFragment : Fragment() {
 
 
     @Suppress("IfThenToSafeAccess")
-    private val adapter = MainFragmentAdapter(
-        object : OnItemViewClickListener {
-            override fun onItemViewClick(weather: Weather) {
-                requireActivity()
-                    .supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.container, DetailsFragment.newInstance(weather))
-                    .addToBackStack("")
-                    .commit()
-            }
+    private val adapter = MainFragmentAdapter {
+        activity?.supportFragmentManager?.apply {
+            beginTransaction()
+                .replace(R.id.container, DetailsFragment.newInstance(it))
+                .addToBackStack("")
+                .commit()
         }
-    )
+    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -62,8 +55,14 @@ class MainFragment : Fragment() {
             renderData(it)
         })
         when ((requireActivity() as MainActivity).lastWeatherList) {
-            WeatherList.RUS -> viewModel.getWeatherFromLocalSourceRus()
-            WeatherList.WORLD -> viewModel.getWeatherFromLocalSourceWorld()
+            WeatherList.RUS -> {
+                viewModel.getWeatherFromLocalSourceRus()
+                binding.mainFAB.setImageResource(R.drawable.rus)
+            }
+            WeatherList.WORLD -> {
+                viewModel.getWeatherFromLocalSourceWorld()
+                binding.mainFAB.setImageResource(R.drawable.earth)
+            }
         }
     }
 
@@ -94,24 +93,36 @@ class MainFragment : Fragment() {
             }
             is AppState.Error -> {
                 binding.mainLoadingLayout.visibility = View.GONE
-                Snackbar.make(requireView(), "Error", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Reload") { viewModel.getWeatherFromLocalSourceRus() }
-                    .show()
+                binding.mainLoadingLayout.showSnackBar(
+                    text = "Error",
+                    actionText = "Reload",
+                    length = Snackbar.LENGTH_INDEFINITE,
+                    action = {
+                        viewModel.getWeatherFromLocalSourceRus()
+                    })
             }
         }
     }
+
 
     override fun onDestroy() {
         adapter.removeListener()
         super.onDestroy()
     }
 
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    interface OnItemViewClickListener {
-        fun onItemViewClick(weather: Weather)
+
+    private fun View.showSnackBar(
+        text: String,
+        actionText: String,
+        action: (View) -> Unit,
+        length: Int = Snackbar.LENGTH_INDEFINITE
+    ) {
+        Snackbar.make(this, text, length).setAction(actionText, action).show()
     }
 }
