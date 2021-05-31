@@ -9,7 +9,7 @@ val CITIES_RUS = listOf("Moscow", "St. Petersburg", "Samara")
 val CITIES_WORLD = listOf("New York", "Berlin", "Tokyo")
 
 data class Weather(
-    val city: String = getRandomCity(),
+    val city: City = City("Moscow", 0.0, 0.0),
     val currentTemperature: Int = getRandomTemperature(),
     val currentWeather: Weathers = getRandomWeather(),
     val morningTemperature: Int = getRandomTemperature(),
@@ -27,18 +27,16 @@ data class Weather(
 
 fun getWorldCities(): List<Weather> {
     val worldWeather = mutableListOf<Weather>()
-    CITIES_WORLD.forEach {
-        worldWeather.add(Weather(city = it))
-    }
+    worldWeather.add(Weather(city = City("New York", 40.42, 74.00)))
+    worldWeather.add(Weather(city = City("Berlin", 52.31, 13.24)))
     return worldWeather.toList()
 }
 
 
 fun getRusCities(): List<Weather> {
     val rusWeather = mutableListOf<Weather>()
-    CITIES_RUS.forEach {
-        rusWeather.add(Weather(city = it))
-    }
+    rusWeather.add(Weather(city = City("Moscow", 55.45, 37.37)))
+    rusWeather.add(Weather(city = City("St. Petersburg", 59.57, 30.19)))
     return rusWeather.toList()
 }
 
