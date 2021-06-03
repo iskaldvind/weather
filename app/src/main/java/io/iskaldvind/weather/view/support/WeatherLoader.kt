@@ -12,7 +12,7 @@ import java.net.URL
 import java.util.stream.Collectors
 import javax.net.ssl.HttpsURLConnection
 
-private const val API_KEY = "4fe91c82-19da-4483-93a1-638f5cf32c9d"
+private const val API_KEY = "f26afc47-f3f9-49f5-875d-e74956f2a95c"
 
 class WeatherLoader(
     private val listener: WeatherLoaderListener,
@@ -22,7 +22,7 @@ class WeatherLoader(
 
     fun loadWeather() {
         try {
-            val url = URL("https://api.weather.yandex.ru/v2/informers?lat=${lat}&lon=${lon}")
+            val url = URL("https://api.weather.yandex.ru/v2/forecast?lat=${lat}&lon=${lon}")
             val handler = Handler(Looper.getMainLooper())
             Thread {
                 var urlConnection: HttpsURLConnection? = null
