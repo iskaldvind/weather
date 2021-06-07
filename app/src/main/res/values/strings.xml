@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Weather</string>
+
+    <string name="temperature">Temperature</string>
+    <string name="celsius" translatable="false">&#xb0;C</string>
+    <string name="morning">Morning</string>
+    <string name="day">Day</string>
+    <string name="evening">Evening</string>
+    <string name="night">Night</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="sunny">sunny</string>
+    <string name="cloudy">cloudy</string>
+    <string name="rainy">rainy</string>
+    <string name="snowy">snowy</string>
+    <string name="thunder">thunder</string>
+    <string name="min">min</string>
+    <string name="max">max</string>
+    <string name="moscow">Moscow</string>
+    <string name="new_york">New York</string>
+    <string name="tokyo">Tokyo</string>
+    <string name="cairo">Cairo</string>
+    <string name="error">Error</string>
+    <string name="reload">Reload</string>
 </resources>
