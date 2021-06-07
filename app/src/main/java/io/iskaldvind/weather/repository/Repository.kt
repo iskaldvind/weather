@@ -1,4 +1,6 @@
-package io.iskaldvind.weather.model
+package io.iskaldvind.weather.repository
+
+import io.iskaldvind.weather.model.Weather
 
 interface Repository {
 

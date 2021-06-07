@@ -20,4 +20,6 @@
     <string name="new_york">New York</string>
     <string name="tokyo">Tokyo</string>
     <string name="cairo">Cairo</string>
+    <string name="error">Error</string>
+    <string name="reload">Reload</string>
 </resources>

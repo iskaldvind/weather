@@ -3,8 +3,8 @@ package io.iskaldvind.weather.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.iskaldvind.weather.model.AppState
-import io.iskaldvind.weather.model.Repository
-import io.iskaldvind.weather.model.RepositoryImpl
+import io.iskaldvind.weather.repository.Repository
+import io.iskaldvind.weather.repository.RepositoryImpl
 import java.lang.Thread.sleep
 
 

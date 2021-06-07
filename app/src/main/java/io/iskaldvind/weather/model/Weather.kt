@@ -1,28 +1,28 @@
 package io.iskaldvind.weather.model
 
-import kotlin.math.roundToInt
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-const val MAX_TEMP = 30
-const val MIN_TEMP = -30
-
-val CITIES_RUS = listOf("Moscow", "St. Petersburg", "Samara")
-val CITIES_WORLD = listOf("New York", "Berlin", "Tokyo")
-
+@Parcelize
 data class Weather(
-    val city: City = City("Moscow", 0.0, 0.0),
-    val currentTemperature: Int = getRandomTemperature(),
-    val currentWeather: Weathers = getRandomWeather(),
-    val morningTemperature: Int = getRandomTemperature(),
-    val dayTemperature: Int = currentTemperature,
-    val eveningTemperature: Int = getRandomTemperature(),
-    val nightTemperature: Int = getRandomTemperature(),
+    val city: City = getDefaultCity(),
+    val currentTemperature: Int = 0,
+    val currentWeather: String = "sunny",
+    val morningTemperature: Int = 0,
+    val dayTemperature: Int = 0,
+    val eveningTemperature: Int = 0,
+    val nightTemperature: Int = 0,
     val todayTemperatureMax: Int = morningTemperature.coerceAtLeast(dayTemperature)
         .coerceAtLeast(eveningTemperature.coerceAtLeast(nightTemperature)),
     val todayTemperatureMin: Int = morningTemperature.coerceAtMost(dayTemperature)
         .coerceAtMost(eveningTemperature.coerceAtMost(nightTemperature)),
-    val tomorrowTemperatureMax: Int = todayTemperatureMax + 5,
-    val tomorrowTemperatureMin: Int = todayTemperatureMin - 5
-)
+    val tomorrowTemperatureMax: Int = 0,
+    val tomorrowTemperatureMin: Int = 0,
+    val icon: String? = "bkn_n"
+) : Parcelable
+
+
+fun getDefaultCity() = City("Moscow", 55.45, 37.37)
 
 
 fun getWorldCities(): List<Weather> {
@@ -39,27 +39,3 @@ fun getRusCities(): List<Weather> {
     rusWeather.add(Weather(city = City("St. Petersburg", 59.57, 30.19)))
     return rusWeather.toList()
 }
-
-
-private fun getRandomWeather(): Weathers {
-    return when ((Math.random() * 4).roundToInt()) {
-        0 -> Weathers.SUNNY
-        1 -> Weathers.CLOUDY
-        2 -> Weathers.RAINY
-        3 -> Weathers.SNOWY
-        else -> Weathers.THUNDER
-    }
-}
-
-
-private fun getRandomTemperature(): Int {
-    return (Math.random() * (MAX_TEMP - MIN_TEMP) - ((MAX_TEMP - MIN_TEMP)/2)).roundToInt()
-}
-
-
-private fun getRandomCity(): String {
-    val rnd = (Math.random() * (CITIES_RUS.size - 1)).roundToInt()
-    return CITIES_RUS[rnd]
-}
-
-

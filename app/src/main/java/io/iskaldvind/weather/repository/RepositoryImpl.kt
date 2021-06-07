@@ -1,4 +1,8 @@
-package io.iskaldvind.weather.model
+package io.iskaldvind.weather.repository
+
+import io.iskaldvind.weather.model.Weather
+import io.iskaldvind.weather.model.getRusCities
+import io.iskaldvind.weather.model.getWorldCities
 
 class RepositoryImpl : Repository {
 
