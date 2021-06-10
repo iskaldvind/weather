@@ -2,9 +2,12 @@ package io.iskaldvind.weather.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.iskaldvind.weather.app.App.Companion.getHistoryDao
+import io.iskaldvind.weather.app.AppState
 import io.iskaldvind.weather.model.*
 import io.iskaldvind.weather.repository.DetailsRepository
 import io.iskaldvind.weather.repository.DetailsRepositoryImpl
+import io.iskaldvind.weather.repository.LocalRepositoryImpl
 import io.iskaldvind.weather.repository.RemoteDataSource
 import io.iskaldvind.weather.utils.convertDtoToModel
 import retrofit2.Call
@@ -17,7 +20,8 @@ private const val CORRUPTED_DATA = "Неполные данные"
 
 class DetailsViewModel(
     private val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
-    private val detailsRepositoryImpl: DetailsRepository = DetailsRepositoryImpl(RemoteDataSource())
+    private val detailsRepositoryImpl: DetailsRepository = DetailsRepositoryImpl(RemoteDataSource()),
+    private val historyRepositoryImpl: LocalRepositoryImpl = LocalRepositoryImpl(getHistoryDao())
 ) : ViewModel() {
 
 
@@ -56,5 +60,9 @@ class DetailsViewModel(
                 AppState.Success(convertDtoToModel(serverResponse))
             }
         }
+    }
+
+    fun saveCityToDB(weather: Weather) {
+        historyRepositoryImpl.saveEntity(weather)
     }
 }

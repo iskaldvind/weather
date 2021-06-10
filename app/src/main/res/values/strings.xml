@@ -22,4 +22,8 @@
     <string name="cairo">Cairo</string>
     <string name="error">Error</string>
     <string name="reload">Reload</string>
+    <string name="authorities">provider</string>
+    <string name="provider">provider</string>
+    <string name="history">history</string>
+    <string name="clear">clear</string>
 </resources>

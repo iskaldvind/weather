@@ -1,5 +1,6 @@
 package io.iskaldvind.weather.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import io.iskaldvind.weather.R
 import io.iskaldvind.weather.databinding.MainFragmentBinding
-import io.iskaldvind.weather.model.AppState
+import io.iskaldvind.weather.app.AppState
 import io.iskaldvind.weather.model.WeatherList
 import io.iskaldvind.weather.view.support.MainFragmentAdapter
 import io.iskaldvind.weather.viewmodel.MainViewModel
@@ -17,6 +18,8 @@ import io.iskaldvind.weather.viewmodel.MainViewModel
 class MainFragment : Fragment() {
 
     companion object {
+        private const val IS_WORLD_KEY = "LIST_OF_TOWNS_KEY"
+
         fun newInstance() = MainFragment()
     }
 
@@ -54,17 +57,37 @@ class MainFragment : Fragment() {
         viewModel.getLiveData().observe(viewLifecycleOwner, {
             renderData(it)
         })
-        when ((requireActivity() as MainActivity).lastWeatherList) {
-            WeatherList.RUS -> {
-                viewModel.getWeatherFromLocalSourceRus()
-                binding.mainFAB.setImageResource(R.drawable.rus)
-            }
-            WeatherList.WORLD -> {
-                viewModel.getWeatherFromLocalSourceWorld()
-                binding.mainFAB.setImageResource(R.drawable.earth)
+        showListOfTowns()
+//        when ((requireActivity() as MainActivity).lastWeatherList) {
+//            WeatherList.RUS -> {
+//                viewModel.getWeatherFromLocalSourceRus()
+//                binding.mainFAB.setImageResource(R.drawable.rus)
+//            }
+//            WeatherList.WORLD -> {
+//                viewModel.getWeatherFromLocalSourceWorld()
+//                binding.mainFAB.setImageResource(R.drawable.earth)
+//            }
+//        }
+    }
+
+
+    private fun showListOfTowns() {
+        activity?.let {
+            if (it.getPreferences(Context.MODE_PRIVATE)
+                    .getBoolean(IS_WORLD_KEY, false)
+            ) changeWeatherDataSet() else viewModel.getWeatherFromLocalSourceRus()
+        }
+    }
+
+    private fun saveListOfTowns() {
+        activity?.let {
+            with(it.getPreferences(Context.MODE_PRIVATE).edit()) {
+                putBoolean(IS_WORLD_KEY, !isDataSetRus)
+                apply()
             }
         }
     }
+
 
 
     private fun changeWeatherDataSet() {
@@ -79,6 +102,7 @@ class MainFragment : Fragment() {
             activity.lastWeatherList = WeatherList.RUS
         }
         isDataSetRus = !isDataSetRus
+        saveListOfTowns()
     }
 
 

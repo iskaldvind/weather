@@ -11,13 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.squareup.picasso.Picasso
 import io.iskaldvind.weather.R
+import io.iskaldvind.weather.app.AppState
 import io.iskaldvind.weather.databinding.FragmentDetailsBinding
 import io.iskaldvind.weather.model.*
 import io.iskaldvind.weather.utils.showSnackBar
 import io.iskaldvind.weather.viewmodel.DetailsViewModel
 
 
-class DetailsFragment(val weather: Weather) : Fragment() {
+class DetailsFragment(val passedWeather: Weather) : Fragment() {
 
     companion object {
         fun newInstance(weather: Weather): DetailsFragment = DetailsFragment(weather)
@@ -38,7 +39,7 @@ class DetailsFragment(val weather: Weather) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
-        viewModel.getWeatherFromRemoteSource(weather.city.lat, weather.city.lon)
+        viewModel.getWeatherFromRemoteSource(passedWeather.city.lat, passedWeather.city.lon)
     }
 
     private fun renderData(appState: AppState) {
@@ -60,8 +61,8 @@ class DetailsFragment(val weather: Weather) : Fragment() {
                     getString(R.string.reload),
                     {
                         viewModel.getWeatherFromRemoteSource(
-                            weather.city.lat,
-                            weather.city.lon
+                            passedWeather.city.lat,
+                            passedWeather.city.lon
                         )
                     })
             }
@@ -69,9 +70,9 @@ class DetailsFragment(val weather: Weather) : Fragment() {
     }
 
     private fun setWeather(weather: Weather) {
-        val city = weather.city
+        val city = passedWeather.city
+        saveCity(city, weather)
         binding.detailsCity.text = city.name
-
         weather.icon?.let {
             GlideToVectorYou.justLoadImage(
                 activity,
@@ -86,6 +87,20 @@ class DetailsFragment(val weather: Weather) : Fragment() {
             .get()
             .load("https://freepngimg.com/thumb/city/36275-3-city-hd.png")
             .into(binding.detailsHeaderIcon)
+    }
+
+
+    private fun saveCity(
+        city: City,
+        weather: Weather
+    ) {
+        viewModel.saveCityToDB(
+            Weather(
+                city,
+                weather.currentTemperature,
+                weather.currentWeather
+            )
+        )
     }
 
     

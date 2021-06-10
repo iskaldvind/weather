@@ -1,4 +1,6 @@
-package io.iskaldvind.weather.model
+package io.iskaldvind.weather.app
+
+import io.iskaldvind.weather.model.Weather
 
 sealed class AppState {
 
