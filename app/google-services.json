@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "619254545541",
+    "project_id": "weather-3386f",
+    "storage_bucket": "weather-3386f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619254545541:android:c1cb71fb3042b738bd3dec",
+        "android_client_info": {
+          "package_name": "io.iskaldvind.weather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619254545541-j2mqa90afe1ni1qgq2fuvketm0tfqu5a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.iskaldvind.weather",
+            "certificate_hash": "664b4cdaea4c44d9e6bd00ff63c45156e4b6365e"
+          }
+        },
+        {
+          "client_id": "619254545541-m1s1cso20nn0e891qt6tbiv0ni1co7vj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjcx4NDQP7FY3KDmL-kNZdAE-97w0tVdI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619254545541-m1s1cso20nn0e891qt6tbiv0ni1co7vj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
