@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -40,11 +41,16 @@ android {
 }
 
 dependencies {
+    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
     //Map
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
 
     //Room
     implementation 'androidx.room:room-runtime:2.3.0'
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
     kapt 'androidx.room:room-compiler:2.3.0'
 
     //GlideToVectorYou
