@@ -15,7 +15,7 @@ private const val URI_ID = 2 // URI для конкретной записи
 private const val ENTITY_PATH =
     "HistoryEntity" // Часть пути (будем определять путь до HistoryEntity)
 
-class EducationContentProvider : ContentProvider() {
+class WeatherContentProvider : ContentProvider() {
 
     private var authorities: String? = null // Адрес URI
     private lateinit var uriMatcher: UriMatcher // Помогает определить тип адреса URI

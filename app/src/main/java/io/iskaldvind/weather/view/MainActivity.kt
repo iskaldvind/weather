@@ -7,6 +7,7 @@ import android.view.MenuItem
 import io.iskaldvind.weather.R
 import io.iskaldvind.weather.databinding.MainActivityBinding
 import io.iskaldvind.weather.model.WeatherList
+import io.iskaldvind.weather.view.experiments.ContentProviderFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +40,15 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.apply {
                     beginTransaction()
                         .add(R.id.container, HistoryFragment.newInstance())
+                        .addToBackStack("")
+                        .commitAllowingStateLoss()
+                }
+                true
+            }
+            R.id.menu_content_provider -> {
+                supportFragmentManager.apply {
+                    beginTransaction()
+                        .add(R.id.container, ContentProviderFragment.newInstance())
                         .addToBackStack("")
                         .commitAllowingStateLoss()
                 }
