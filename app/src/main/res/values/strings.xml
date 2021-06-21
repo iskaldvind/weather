@@ -28,7 +28,7 @@
     <string name="history">history</string>
     <string name="clear">clear</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCQEJQX7N8tuMDXutzippJasW9pzTUMCpo</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBjcx4NDQP7FY3KDmL-kNZdAE-97w0tVdI</string>
     <string name="google_maps">GoogleMaps</string>
     <string name="dialog_button_close">Закрыть</string>
     <string name="dialog_title_no_gps">Доступ к геолокации закрыт</string>
