@@ -8,6 +8,7 @@ import io.iskaldvind.weather.R
 import io.iskaldvind.weather.databinding.MainActivityBinding
 import io.iskaldvind.weather.model.WeatherList
 import io.iskaldvind.weather.view.experiments.ContentProviderFragment
+import io.iskaldvind.weather.view.maps.GoogleMapsFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +37,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.menu_map -> {
+                supportFragmentManager.apply {
+                    beginTransaction()
+                        .add(R.id.container, GoogleMapsFragment.newInstance())
+                        .addToBackStack("")
+                        .commitAllowingStateLoss()
+                }
+                true
+            }
             R.id.menu_history -> {
                 supportFragmentManager.apply {
                     beginTransaction()

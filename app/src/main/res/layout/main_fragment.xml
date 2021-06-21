@@ -18,6 +18,17 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/mainFABLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:tint="@null"
+        android:src="@android:drawable/ic_dialog_map"
+        app:layout_constraintBottom_toTopOf="@+id/main_FAB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="54dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/main_FAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,6 +39,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:maxImageSize="56dp"
         tools:ignore="ContentDescription" />
+
+    <include layout="@layout/loading_layout" />
 
     <FrameLayout
         android:id="@+id/main_loading_layout"
