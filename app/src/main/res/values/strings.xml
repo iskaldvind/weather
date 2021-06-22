@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Weather</string>
 
     <string name="temperature">Temperature</string>
@@ -22,8 +22,6 @@
     <string name="cairo">Cairo</string>
     <string name="error">Error</string>
     <string name="reload">Reload</string>
-    <string name="authorities">provider</string>
-    <string name="provider">provider</string>
     <string name="map">map</string>
     <string name="history">history</string>
     <string name="clear">clear</string>
@@ -45,4 +43,7 @@
     <string name="default_address">Red Square, 1, Moscow</string>
     <string name="button_search_map">Search</string>
     <string name="marker_start">Start</string>
+    <string name="yandex_weather_url">https://api.weather.yandex.ru/</string>
+    <string name="yandex_weather_token" tools:ignore="TypographyDashes">f26afc47-f3f9-49f5-875d-e74956f2a95c</string>
+    <string name="open_weather_key">8b0807c6c3796fba5703a0e242014915</string>
 </resources>

@@ -1,5 +1,9 @@
 package io.iskaldvind.weather.utils
 
+import android.app.Activity
+import android.net.Uri
+import android.widget.ImageView
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import io.iskaldvind.weather.model.*
 import io.iskaldvind.weather.room.HistoryEntity
 
@@ -16,4 +20,13 @@ fun convertHistoryEntityToWeather(entityList: List<HistoryEntity>): List<Weather
 
 fun convertWeatherToEntity(weather: Weather): HistoryEntity {
     return HistoryEntity(0, weather.city.name, weather.currentTemperature, weather.currentWeather)
+}
+
+fun getIcon(id: String, activity: Activity, widget: ImageView) {
+    val url = "https://yastatic.net/weather/i/icons/blueye/color/svg/${id}.svg"
+    GlideToVectorYou.justLoadImage(
+        activity,
+        Uri.parse(url),
+        widget
+    )
 }

@@ -1,6 +1,5 @@
 package io.iskaldvind.weather.view
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,7 @@ import io.iskaldvind.weather.R
 import io.iskaldvind.weather.app.AppState
 import io.iskaldvind.weather.databinding.FragmentDetailsBinding
 import io.iskaldvind.weather.model.*
+import io.iskaldvind.weather.utils.getIcon
 import io.iskaldvind.weather.utils.showSnackBar
 import io.iskaldvind.weather.viewmodel.DetailsViewModel
 
@@ -74,15 +74,10 @@ class DetailsFragment(val passedWeather: Weather) : Fragment() {
         saveCity(city, weather)
         binding.detailsCity.text = city.name
         weather.icon?.let {
-            GlideToVectorYou.justLoadImage(
-                activity,
-                Uri.parse("https://yastatic.net/weather/i/icons/blueye/color/svg/${it}.svg"),
-                binding.detailsWeatherIcon
-            )
+            getIcon(it, requireActivity(), binding.detailsWeatherIcon)
             binding.detailsTemperature.text = weather.currentTemperature.toString()
             binding.detailsWeather.text = weather.currentWeather
         }
-
         Picasso
             .get()
             .load("https://freepngimg.com/thumb/city/36275-3-city-hd.png")

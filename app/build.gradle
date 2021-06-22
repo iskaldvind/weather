@@ -20,13 +20,33 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "TYPE", '"RELEASE"'
+        }
+
+        debug {
+            applicationIdSuffix ".debug"
+            minifyEnabled false
+            buildConfigField "String", "TYPE", '"DEBUG"'
         }
     }
 
     buildFeatures {
         viewBinding true
+    }
+
+    flavorDimensions 'api'
+
+    productFlavors {
+        open {
+            dimension 'api'
+            applicationIdSuffix ".open"
+        }
+        yandex {
+            dimension 'api'
+            applicationIdSuffix ".yandex"
+        }
     }
 
     compileOptions {

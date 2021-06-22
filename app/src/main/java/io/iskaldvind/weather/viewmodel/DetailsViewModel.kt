@@ -1,5 +1,6 @@
 package io.iskaldvind.weather.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.iskaldvind.weather.app.App.Companion.getHistoryDao
@@ -13,6 +14,7 @@ import io.iskaldvind.weather.utils.convertDtoToModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 
 private const val SERVER_ERROR = "Ошибка сервера"
 private const val REQUEST_ERROR = "Ошибка запроса на сервер"
@@ -53,11 +55,11 @@ class DetailsViewModel(
         }
 
         private fun checkResponse(serverResponse: WeatherDTO): AppState {
-            val fact = serverResponse.fact
-            return if (fact?.temp == null || fact.condition.isNullOrEmpty()) {
+            return try {
+                val model = convertDtoToModel(serverResponse)
+                AppState.Success(model)
+            } catch (e: Exception) {
                 AppState.Error(Throwable(CORRUPTED_DATA))
-            } else {
-                AppState.Success(convertDtoToModel(serverResponse))
             }
         }
     }
